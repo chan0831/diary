@@ -20,3 +20,4 @@ public class Member {
     @NotEmpty
     private String password;
 }
+//깃 버전 테스트 .111111111
