@@ -28,8 +28,7 @@ public class TestDataInit {
         letter.setTitle("testDiary");
         letter.setDate("24.06.17");
         letter.setDay(408);
-        letter.setLetters("생일");
-
+        letter.setContents("생일");
         memberRepository.save(member);
         letterRepository.save(letter);
     }
