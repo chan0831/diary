@@ -9,4 +9,5 @@ public class Score {
 
     private String code;
     private String displayName;
+
 }

@@ -3,6 +3,7 @@ package Diary.Propose.web.letter;
 import Diary.Propose.domain.letter.Letter;
 import Diary.Propose.domain.letter.LetterRepository;
 import Diary.Propose.domain.letter.LetterType;
+import Diary.Propose.domain.letter.Score;
 import Diary.Propose.web.letter.form.LetterSaveForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +14,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -26,6 +28,24 @@ public class LetterController {
     @ModelAttribute("letterType")
     public LetterType[] letterTypes() {return LetterType.values();}
 
+    @ModelAttribute("score")
+    public List<Score> score(){
+        List<Score> score = new ArrayList<>();
+
+        score.add(new Score("5.0", "5.0"));
+        score.add(new Score("4.5", "4.5"));
+        score.add(new Score("4.0", "4.0"));
+        score.add(new Score("3.5", "3.5"));
+        score.add(new Score("3.0", "3.0"));
+        score.add(new Score("2.5", "2.5"));
+        score.add(new Score("2.0", "2.0"));
+        score.add(new Score("1.5", "1.5"));
+        score.add(new Score("1.0", "1.0"));
+        score.add(new Score("0.5", "0.5"));
+        score.add(new Score("0.0", "0.0"));
+
+        return score;
+    }
     @GetMapping
     public String letters(Model model){
         List<Letter> letters = letterRepository.findAll();
@@ -62,6 +82,7 @@ public class LetterController {
         letter.setContents(form.getContents());
 
         letter.setLetterType(form.getLetterType());
+        letter.setScore(form.getScore());
 
 
         Letter savedLetter = letterRepository.save(letter);

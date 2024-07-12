@@ -30,7 +30,9 @@ public class LetterRepository {
         findLetter.setDate(updateParam.getDate());
         findLetter.setDay(updateParam.getDay());
         findLetter.setContents(updateParam.getContents());
+
         findLetter.setLetterType(updateParam.getLetterType());
+        findLetter.setScore(updateParam.getScore());
     }
 
     public void clearStore(){ store.clear();}
