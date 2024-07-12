@@ -72,13 +72,25 @@
         <div>
             <label for="contents" th:text="#{label.letter.contents}">내용</label>
             <textarea id="contents" name="내용"  th:field="*{contents}"
-                   th:errorclass="field-error" class="form-control" placeholder="만난 일수가 며칠인지 입력하세요"></textarea>
+                   th:errorclass="field-error" class="form-control" placeholder="내용을 입력하세요"></textarea>
             <div class="field-error" th:errors="*{contents}">
-                만난 일 수 입력 오류
+                내용 입력 오류
             </div>
         </div>
 
         <hr class="my-4">
+        <!-- radio button -->
+        <div>
+            <div>상품 종류</div>
+            <div th:each="type : ${letterType}" class="form-check form-check-inline">
+                <input type="radio" th:field="*{letterType}" th:value="${type.name()}"
+                       class="form-check-input">
+                <label th:for="${#ids.prev('letterType')}" th:text="${type.description}"
+                       class="form-check-label">
+                    BOOK
+                </label>
+            </div>
+        </div>
 
         <hr class="my-4">
 

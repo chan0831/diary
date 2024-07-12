@@ -2,6 +2,7 @@ package Diary.Propose.web.letter;
 
 import Diary.Propose.domain.letter.Letter;
 import Diary.Propose.domain.letter.LetterRepository;
+import Diary.Propose.domain.letter.LetterType;
 import Diary.Propose.web.letter.form.LetterSaveForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +22,9 @@ import java.util.List;
 public class LetterController {
 
     private final LetterRepository letterRepository;
+
+    @ModelAttribute("letterType")
+    public LetterType[] letterTypes() {return LetterType.values();}
 
     @GetMapping
     public String letters(Model model){
@@ -46,7 +50,7 @@ public class LetterController {
     public String addLetter(@Validated @ModelAttribute ("letter")LetterSaveForm form, BindingResult bindingResult, RedirectAttributes redirectAttributes){
 
         if(bindingResult.hasErrors()){
-            log.info("errors={}", bindingResult);
+            log.info("errors{}=", bindingResult);
             return "letters/addForm";
         }
 
@@ -56,6 +60,9 @@ public class LetterController {
         letter.setDate(form.getDate());
         letter.setDay(form.getDay());
         letter.setContents(form.getContents());
+
+        letter.setLetterType(form.getLetterType());
+
 
         Letter savedLetter = letterRepository.save(letter);
 

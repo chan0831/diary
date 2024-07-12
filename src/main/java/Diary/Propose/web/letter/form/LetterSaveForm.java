@@ -1,5 +1,6 @@
 package Diary.Propose.web.letter.form;
 
+import Diary.Propose.domain.letter.LetterType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -20,4 +21,6 @@ public class LetterSaveForm {
 
     @NotBlank
     private String contents;
+
+    private LetterType letterType;
 }

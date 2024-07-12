@@ -57,6 +57,21 @@
 
     <hr class="my-4">
 
+    <!-- radio button -->
+    <div>
+        <div>일기 카테고리</div>
+        <div th:each="type : ${letterType}" class="form-check form-check-inline">
+            <input type="radio" th:field="${letter.letterType}" th:value="${type.name()}"
+                   class="form-check-input" disabled>
+            <label th:for="${#ids.prev('letterType')}" th:text="${type.description}"
+                   class="form-check-label">
+                CALL
+            </label>
+        </div>
+    </div>
+
+    <hr class="my-4">
+
     <div class="row">
         <div class="col">
             <button class="w-100 btn btn-primary btn-lg"
