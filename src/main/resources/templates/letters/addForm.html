@@ -65,7 +65,7 @@
             <label for="day" th:text="#{label.letter.day}">만난 일 수</label>
             <input type="text" id="day" th:field="*{day}"
                    th:errorclass="field-error" class="form-control" placeholder="만난 일수가 며칠인지 입력하세요">
-            <div class="field-error" th:errors="*{day}">
+            <div th:if="${#fields.hasErrors('day')}" class="field-error" th:errors="*{day}">
                 만난 일 수 입력 오류
             </div>
         </div>
