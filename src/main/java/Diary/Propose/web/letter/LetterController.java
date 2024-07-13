@@ -91,4 +91,17 @@ public class LetterController {
         redirectAttributes.addAttribute("status", true);
         return "redirect:/letters/{letterId}";
     }
+
+    @GetMapping("/{letterId}/edit")
+    public String editForm(@PathVariable Long letterId, Model model){
+        Letter letter = letterRepository.findById(letterId);
+        model.addAttribute("letter", letter);
+        return "letters/editForm";
+    }
+
+    @PostMapping("/{letterId}/edit")
+    public String edit(@PathVariable Long letterId, @ModelAttribute Letter letter){
+        letterRepository.update(letterId, letter);
+        return "redirect:/letters/{letterId}";
+    }
 }
