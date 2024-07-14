@@ -1,17 +1,23 @@
 package Diary.Propose.web.perfume;
 
 import Diary.Propose.domain.letter.Score;
+import Diary.Propose.domain.perfume.Perfume;
 import Diary.Propose.domain.perfume.PerfumeRepository;
 import Diary.Propose.domain.perfume.Rating;
+import Diary.Propose.web.perfume.form.PerfumeSaveForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 //향수 메인 -> /perfumes
 //향수 목록 -> /perfumes/perfumes
@@ -45,5 +51,82 @@ public class PerfumeController {
         return rating;
     }
 
+    @ModelAttribute("accords")
+    public Map<String,String> accords(){
+        Map<String, String> accords = new LinkedHashMap<>();
+        accords.put("spicy", "spicy");
+        accords.put("woody", "woody");
+        accords.put("white musk", "white musk");
+        return accords;
+    }
 
+    @ModelAttribute("season")
+    public Map<String, String> season(){
+        Map<String, String> season = new LinkedHashMap<>();
+        season.put("spring", "봄");
+        season.put("summer", "여름");
+        season.put("fall", "가을");
+        season.put("winter", "겨울");
+        return season;
+    }
+
+    @GetMapping("/perfumes/{perfumeId}")
+    public String perfume(@PathVariable long perfumeId, Model model){
+        Perfume perfume = perfumeRepository.findById(perfumeId);
+        model.addAttribute("perfume", perfume);
+        return "perfumes/perfume";
+    }
+
+    @GetMapping("/perfumes")
+    public String perfumes(Model model){
+        List<Perfume> perfumes = perfumeRepository.findAll();
+        model.addAttribute("perfumes", perfumes);
+        return "perfumes/perfumes";
+    }
+
+    @GetMapping("/add")
+    public String addForm(Model model){
+        model.addAttribute("perfume", new Perfume());
+        return "perfumes/addForm";
+    }
+
+    @PostMapping("/add")
+    public String addPerfume(@Validated @ModelAttribute ("perfume")PerfumeSaveForm form, BindingResult bindingResult, RedirectAttributes redirectAttributes){
+
+        if(bindingResult.hasErrors()){
+            log.info("errors{}=", bindingResult);
+            return "perfumes/addForm";
+        }
+
+        Perfume perfume = new Perfume();
+        perfume.setPerfumeName(form.getPerfumeName());
+        perfume.setBrand(form.getBrand());
+        perfume.setDate(form.getDate());
+        perfume.setAccords(form.getAccords());
+        perfume.setTopNote(form.getTopNote());
+        perfume.setMiddleNote(form.getMiddleNote());
+        perfume.setBaseNote(form.getBaseNote());
+        perfume.setSeason(form.getSeason());
+        perfume.setRating(form.getRating());
+        perfume.setReview(form.getReview());
+
+        Perfume savedPerfume = perfumeRepository.save(perfume);
+
+        redirectAttributes.addAttribute("perfumeId", savedPerfume.getId());
+        redirectAttributes.addAttribute("status", true);
+        return "redirect:/perfumes/perfumes/{perfumeId}";
+    }
+
+    @GetMapping("/perfumes/{perfumeId}/edit")
+    public String editForm(@PathVariable Long perfumeId, Model model){
+        Perfume perfume = perfumeRepository.findById(perfumeId);
+        model.addAttribute("perfume", perfume);
+        return "perfumes/editForm";
+    }
+
+    @PostMapping("/perfumes/{perfumeId}/edit")
+    public String edit(@PathVariable Long perfumeId, @ModelAttribute Perfume perfume){
+        perfumeRepository.update(perfumeId, perfume);
+        return "redirect:/perfumes/perfumes/{perfumeId}";
+    }
 }

@@ -2,6 +2,8 @@ package Diary.Propose.domain.perfume;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class Perfume {
 
@@ -13,7 +15,7 @@ public class Perfume {
     private String baseNote; //텍스트박스
     private String rating; //셀렉트 박스
     private String review; //텍스트박스
-    private String season; //멀티 체크박스
+    private List<String> season; //멀티 체크박스
     private String date; //텍스트박스
-    private String accords; //멀티 체크박스
+    private List<String> accords; //멀티 체크박스
 }

@@ -4,6 +4,8 @@ import Diary.Propose.domain.letter.Letter;
 import Diary.Propose.domain.letter.LetterRepository;
 import Diary.Propose.domain.member.Member;
 import Diary.Propose.domain.member.MemberRepository;
+import Diary.Propose.domain.perfume.Perfume;
+import Diary.Propose.domain.perfume.PerfumeRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -14,6 +16,7 @@ public class TestDataInit {
 
     private final MemberRepository memberRepository;
     private final LetterRepository letterRepository;
+    private final PerfumeRepository perfumeRepository;
 
     @PostConstruct
     public void init(){
@@ -31,5 +34,13 @@ public class TestDataInit {
         letter.setContents("생일");
         memberRepository.save(member);
         letterRepository.save(letter);
+
+        Perfume perfume = new Perfume();
+        perfume.setPerfumeName("바카라루쥬");
+        perfume.setBrand("메종 프란시스 커정");
+        perfume.setDate("23.12.11");
+        perfume.setRating("4.5");
+
+        perfumeRepository.save(perfume);
     }
 }

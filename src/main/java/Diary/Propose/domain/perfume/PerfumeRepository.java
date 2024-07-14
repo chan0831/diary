@@ -12,10 +12,10 @@ public class PerfumeRepository {
 
     private static final Map<Long, Perfume> store = new HashMap<>();
 
-    private static long sequeence = 0L;
+    private static long sequence = 0L;
 
     public Perfume save(Perfume perfume){
-        perfume.setId(++sequeence);
+        perfume.setId(++sequence);
         store.put(perfume.getId(),perfume);
         return perfume;
     }
@@ -30,7 +30,7 @@ public class PerfumeRepository {
 
     public void update(Long perfumeId, Perfume updateParam){
 
-        Perfume findPerfume = new Perfume();
+        Perfume findPerfume = findById(perfumeId);
         findPerfume.setPerfumeName(updateParam.getPerfumeName());
         findPerfume.setBrand(updateParam.getBrand());
         findPerfume.setDate(updateParam.getDate());
