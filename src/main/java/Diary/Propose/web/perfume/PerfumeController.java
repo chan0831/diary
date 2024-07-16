@@ -56,7 +56,30 @@ public class PerfumeController {
         Map<String, String> accords = new LinkedHashMap<>();
         accords.put("spicy", "spicy");
         accords.put("woody", "woody");
-        accords.put("white musk", "white musk");
+        accords.put("citrus","citrus");
+        accords.put("sweet","sweet");
+        accords.put("musky","musky");
+        accords.put("gourmand","gourmand");
+        accords.put("floral","floral");
+        accords.put("fruity","fruity");
+        accords.put("green","green");
+        accords.put("amber","amber");
+        accords.put("lactonic","lactonic");
+        accords.put("aldehydic","aldehydic");
+        accords.put("earthy","earthy");
+        accords.put("fresh","fresh");
+        accords.put("powdery","powdery");
+        accords.put("aquatic","aquatic");
+        accords.put("aromatic","aromatic");
+        accords.put("salty","salty");
+        accords.put("metalic","metalic");
+        accords.put("oriental","oriental");
+        accords.put("vanilla","vanilla");
+        accords.put("watery","watery");
+        accords.put("nutty","nutty");
+
+
+
         return accords;
     }
 
