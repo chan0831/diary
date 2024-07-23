@@ -1,4 +1,4 @@
-package Diary.Propose.web;
+package Diary.Propose;
 
 import Diary.Propose.domain.letter.Letter;
 import Diary.Propose.domain.letter.LetterRepository;
