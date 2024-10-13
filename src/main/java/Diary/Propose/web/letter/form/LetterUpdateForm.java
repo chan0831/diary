@@ -4,6 +4,9 @@ import Diary.Propose.domain.letter.LetterType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @Data
 public class LetterUpdateForm {
@@ -26,4 +29,13 @@ public class LetterUpdateForm {
     private LetterType letterType;
 
     private String score;
+
+    @NotNull
+    private Long photoId;
+
+    private String photoName;
+
+    private MultipartFile attachFile;
+
+    private List<MultipartFile> imageFiles;
 }

@@ -6,6 +6,9 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import org.hibernate.validator.constraints.Range;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @Data
 public class LetterSaveForm {
@@ -26,4 +29,11 @@ public class LetterSaveForm {
     private LetterType letterType;
 
     private String score;
+
+    @NotNull
+    private Long photoId;
+
+    private String photoName;
+    private MultipartFile attachFile;
+    private List<MultipartFile> imageFiles;
 }
