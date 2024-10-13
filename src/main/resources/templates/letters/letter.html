@@ -72,7 +72,7 @@
 
     <!-- SELECT -->
     <div>
-        <div>배송 방식</div>
+        <div>평가</div>
         <select th:field="${letter.score}" class="form-select" disabled>
             <option value="">==오늘의 점수는? (5점 만점)==</option>
             <option th:each="score : ${score}" th:value="${score.code}"

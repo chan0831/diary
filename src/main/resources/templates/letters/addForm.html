@@ -81,13 +81,13 @@
         <hr class="my-4">
         <!-- radio button -->
         <div>
-            <div>상품 종류</div>
+            <div>일기 카테고리</div>
             <div th:each="type : ${letterType}" class="form-check form-check-inline">
                 <input type="radio" th:field="*{letterType}" th:value="${type.name()}"
                        class="form-check-input">
                 <label th:for="${#ids.prev('letterType')}" th:text="${type.description}"
                        class="form-check-label">
-                    BOOK
+
                 </label>
             </div>
         </div>
